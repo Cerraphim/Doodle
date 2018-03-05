@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:54563/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DoodleModel" />
+  <xs:element name="GetDoodleUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDoodleUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDoodleUserResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="u" nillable="true" type="q1:DTO_Users" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="AddUserResult" nillable="true" type="q2:DTO_Users" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q3:ArrayOfDTO_Users" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="login" nillable="true" type="q4:DTO_Login" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="LoginResult" nillable="true" type="q5:DTO_Users" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GatherOpenDraws">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GatherOpenDrawsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GatherOpenDrawsResult" nillable="true" type="q6:ArrayOfDTO_OpenDraws" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckGuess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="guess" nillable="true" type="q7:DTO_Guess" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckGuessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="CheckGuessResult" nillable="true" type="q8:DTO_Guess" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinDraw">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="join" nillable="true" type="q9:DTO_JoinDraw" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinDrawResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="JoinDrawResult" nillable="true" type="q10:DTO_JoinDraw" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetWinner">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="winner" nillable="true" type="q11:DTO_Winner" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetWinnerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="SetWinnerResult" nillable="true" type="q12:DTO_Winner" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDraw">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="draw" nillable="true" type="q13:DTO_NewDraw" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDrawResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="CreateDrawResult" nillable="true" type="q14:DTO_OpenDraws" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartDraw">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="draw" nillable="true" type="q15:DTO_OpenDraws" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartDrawResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="StartDrawResult" nillable="true" type="q16:DTO_OpenDraws" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDrawCategories">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDrawCategoriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GetDrawCategoriesResult" nillable="true" type="q17:ArrayOfDTO_GameCategory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_42039_doodleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="draw">
+          <Key>
+            <PropertyRef Name="DrawID" />
+          </Key>
+          <Property Name="DrawID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoodlerUserID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="DrawStatusId" Type="int" />
+          <Property Name="Answer" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="drawCategory">
+          <Key>
+            <PropertyRef Name="DrawCategoryID" />
+          </Key>
+          <Property Name="DrawCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrawCategoryName" Type="varchar" MaxLength="100" />
+          <Property Name="DrawCategoryIcon" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="drawPoints">
+          <Key>
+            <PropertyRef Name="DrawPointID" />
+          </Key>
+          <Property Name="DrawPointID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrawID" Type="int" />
+          <Property Name="DrawPointX" Type="float" />
+          <Property Name="DrawPointY" Type="float" />
+        </EntityType>
+        <EntityType Name="drawStatus">
+          <Key>
+            <PropertyRef Name="DrawStatusID" />
+          </Key>
+          <Property Name="DrawStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrawStatusDesc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="noodler">
+          <Key>
+            <PropertyRef Name="DrawNoodlerID" />
+          </Key>
+          <Property Name="DrawNoodlerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DrawID" Type="int" />
+          <Property Name="Winner" Type="bit" />
+          <Property Name="DrawRating" Type="int" />
+          <Property Name="DoodlerRating" Type="int" />
+        </EntityType>
+        <EntityType Name="userLogin">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="LoginDateTime" Type="datetime" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="varchar" MaxLength="200" />
+          <Property Name="Pword" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Association Name="FK_draw_drawCategory">
+          <End Role="drawCategory" Type="Self.drawCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drawCategory">
+              <PropertyRef Name="DrawCategoryID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_draw_drawStatus">
+          <End Role="drawStatus" Type="Self.drawStatus" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drawStatus">
+              <PropertyRef Name="DrawStatusID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="DrawStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_draw_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="DoodlerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_drawPoints_draw">
+          <End Role="draw" Type="Self.draw" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="drawPoints" Type="Self.drawPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="draw">
+              <PropertyRef Name="DrawID" />
+            </Principal>
+            <Dependent Role="drawPoints">
+              <PropertyRef Name="DrawID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_noodler_draw">
+          <End Role="draw" Type="Self.draw" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="noodler" Type="Self.noodler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="draw">
+              <PropertyRef Name="DrawID" />
+            </Principal>
+            <Dependent Role="noodler">
+              <PropertyRef Name="DrawID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_noodler_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="noodler" Type="Self.noodler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="noodler">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userLogin_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="userLogin" Type="Self.userLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userLogin">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_GatherOpenDraws" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_42039_doodleModelStoreContainer">
+          <EntitySet Name="draw" EntityType="Self.draw" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="drawCategory" EntityType="Self.drawCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="drawPoints" EntityType="Self.drawPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="drawStatus" EntityType="Self.drawStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="noodler" EntityType="Self.noodler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userLogin" EntityType="Self.userLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_draw_drawCategory" Association="Self.FK_draw_drawCategory">
+            <End Role="drawCategory" EntitySet="drawCategory" />
+            <End Role="draw" EntitySet="draw" />
+          </AssociationSet>
+          <AssociationSet Name="FK_draw_drawStatus" Association="Self.FK_draw_drawStatus">
+            <End Role="drawStatus" EntitySet="drawStatus" />
+            <End Role="draw" EntitySet="draw" />
+          </AssociationSet>
+          <AssociationSet Name="FK_draw_users" Association="Self.FK_draw_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="draw" EntitySet="draw" />
+          </AssociationSet>
+          <AssociationSet Name="FK_drawPoints_draw" Association="Self.FK_drawPoints_draw">
+            <End Role="draw" EntitySet="draw" />
+            <End Role="drawPoints" EntitySet="drawPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_noodler_draw" Association="Self.FK_noodler_draw">
+            <End Role="draw" EntitySet="draw" />
+            <End Role="noodler" EntitySet="noodler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_noodler_users" Association="Self.FK_noodler_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="noodler" EntitySet="noodler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userLogin_users" Association="Self.FK_userLogin_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="userLogin" EntitySet="userLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_42039_doodleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="draw">
+          <Key>
+            <PropertyRef Name="DrawID" />
+          </Key>
+          <Property Name="DrawID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoodlerUserID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="DrawStatusId" Type="Int32" />
+          <Property Name="Answer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="drawCategory" Relationship="Self.FK_draw_drawCategory" FromRole="draw" ToRole="drawCategory" />
+          <NavigationProperty Name="drawStatu" Relationship="Self.FK_draw_drawStatus" FromRole="draw" ToRole="drawStatus" />
+          <NavigationProperty Name="user" Relationship="Self.FK_draw_users" FromRole="draw" ToRole="users" />
+          <NavigationProperty Name="drawPoints" Relationship="Self.FK_drawPoints_draw" FromRole="draw" ToRole="drawPoints" />
+          <NavigationProperty Name="noodlers" Relationship="Self.FK_noodler_draw" FromRole="draw" ToRole="noodler" />
+        </EntityType>
+        <EntityType Name="drawCategory">
+          <Key>
+            <PropertyRef Name="DrawCategoryID" />
+          </Key>
+          <Property Name="DrawCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrawCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DrawCategoryIcon" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="draws" Relationship="Self.FK_draw_drawCategory" FromRole="drawCategory" ToRole="draw" />
+        </EntityType>
+        <EntityType Name="drawPoint">
+          <Key>
+            <PropertyRef Name="DrawPointID" />
+          </Key>
+          <Property Name="DrawPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrawID" Type="Int32" />
+          <Property Name="DrawPointX" Type="Double" />
+          <Property Name="DrawPointY" Type="Double" />
+          <NavigationProperty Name="draw" Relationship="Self.FK_drawPoints_draw" FromRole="drawPoints" ToRole="draw" />
+        </EntityType>
+        <EntityType Name="drawStatu">
+          <Key>
+            <PropertyRef Name="DrawStatusID" />
+          </Key>
+          <Property Name="DrawStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrawStatusDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="draws" Relationship="Self.FK_draw_drawStatus" FromRole="drawStatus" ToRole="draw" />
+        </EntityType>
+        <EntityType Name="noodler">
+          <Key>
+            <PropertyRef Name="DrawNoodlerID" />
+          </Key>
+          <Property Name="DrawNoodlerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DrawID" Type="Int32" />
+          <Property Name="Winner" Type="Boolean" />
+          <Property Name="DrawRating" Type="Int32" />
+          <Property Name="DoodlerRating" Type="Int32" />
+          <NavigationProperty Name="draw" Relationship="Self.FK_noodler_draw" FromRole="noodler" ToRole="draw" />
+          <NavigationProperty Name="user" Relationship="Self.FK_noodler_users" FromRole="noodler" ToRole="users" />
+        </EntityType>
+        <EntityType Name="userLogin">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="LoginDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <NavigationProperty Name="user" Relationship="Self.FK_userLogin_users" FromRole="userLogin" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Pword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="draws" Relationship="Self.FK_draw_users" FromRole="users" ToRole="draw" />
+          <NavigationProperty Name="noodlers" Relationship="Self.FK_noodler_users" FromRole="users" ToRole="noodler" />
+          <NavigationProperty Name="userLogins" Relationship="Self.FK_userLogin_users" FromRole="users" ToRole="userLogin" />
+        </EntityType>
+        <Association Name="FK_draw_drawCategory">
+          <End Role="drawCategory" Type="Self.drawCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drawCategory">
+              <PropertyRef Name="DrawCategoryID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_draw_drawStatus">
+          <End Role="drawStatus" Type="Self.drawStatu" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drawStatus">
+              <PropertyRef Name="DrawStatusID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="DrawStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_draw_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="draw" Type="Self.draw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="draw">
+              <PropertyRef Name="DoodlerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_drawPoints_draw">
+          <End Role="draw" Type="Self.draw" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="drawPoints" Type="Self.drawPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="draw">
+              <PropertyRef Name="DrawID" />
+            </Principal>
+            <Dependent Role="drawPoints">
+              <PropertyRef Name="DrawID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_noodler_draw">
+          <End Role="draw" Type="Self.draw" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="noodler" Type="Self.noodler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="draw">
+              <PropertyRef Name="DrawID" />
+            </Principal>
+            <Dependent Role="noodler">
+              <PropertyRef Name="DrawID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_noodler_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="noodler" Type="Self.noodler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="noodler">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userLogin_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="userLogin" Type="Self.userLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userLogin">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_42039_doodleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="draws" EntityType="Self.draw" />
+          <EntitySet Name="drawCategories" EntityType="Self.drawCategory" />
+          <EntitySet Name="drawPoints" EntityType="Self.drawPoint" />
+          <EntitySet Name="drawStatus" EntityType="Self.drawStatu" />
+          <EntitySet Name="noodlers" EntityType="Self.noodler" />
+          <EntitySet Name="userLogins" EntityType="Self.userLogin" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_draw_drawCategory" Association="Self.FK_draw_drawCategory">
+            <End Role="drawCategory" EntitySet="drawCategories" />
+            <End Role="draw" EntitySet="draws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_draw_drawStatus" Association="Self.FK_draw_drawStatus">
+            <End Role="drawStatus" EntitySet="drawStatus" />
+            <End Role="draw" EntitySet="draws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_draw_users" Association="Self.FK_draw_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="draw" EntitySet="draws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_drawPoints_draw" Association="Self.FK_drawPoints_draw">
+            <End Role="draw" EntitySet="draws" />
+            <End Role="drawPoints" EntitySet="drawPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_noodler_draw" Association="Self.FK_noodler_draw">
+            <End Role="draw" EntitySet="draws" />
+            <End Role="noodler" EntitySet="noodlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_noodler_users" Association="Self.FK_noodler_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="noodler" EntitySet="noodlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userLogin_users" Association="Self.FK_userLogin_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="userLogin" EntitySet="userLogins" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GatherOpenDraws" ReturnType="Collection(DB_42039_doodleModel.sp_GatherOpenDraws_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sp_GatherOpenDraws_Result">
+          <Property Type="String" Name="DrawCategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Doodler" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DrawStatusDesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="DrawID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_42039_doodleModelStoreContainer" CdmEntityContainer="DB_42039_doodleEntities">
+          <EntitySetMapping Name="draws">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.draw">
+              <MappingFragment StoreEntitySet="draw">
+                <ScalarProperty Name="DrawID" ColumnName="DrawID" />
+                <ScalarProperty Name="DoodlerUserID" ColumnName="DoodlerUserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="DrawStatusId" ColumnName="DrawStatusId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drawCategories">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.drawCategory">
+              <MappingFragment StoreEntitySet="drawCategory">
+                <ScalarProperty Name="DrawCategoryID" ColumnName="DrawCategoryID" />
+                <ScalarProperty Name="DrawCategoryName" ColumnName="DrawCategoryName" />
+                <ScalarProperty Name="DrawCategoryIcon" ColumnName="DrawCategoryIcon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drawPoints">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.drawPoint">
+              <MappingFragment StoreEntitySet="drawPoints">
+                <ScalarProperty Name="DrawPointID" ColumnName="DrawPointID" />
+                <ScalarProperty Name="DrawID" ColumnName="DrawID" />
+                <ScalarProperty Name="DrawPointX" ColumnName="DrawPointX" />
+                <ScalarProperty Name="DrawPointY" ColumnName="DrawPointY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drawStatus">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.drawStatu">
+              <MappingFragment StoreEntitySet="drawStatus">
+                <ScalarProperty Name="DrawStatusID" ColumnName="DrawStatusID" />
+                <ScalarProperty Name="DrawStatusDesc" ColumnName="DrawStatusDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="noodlers">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.noodler">
+              <MappingFragment StoreEntitySet="noodler">
+                <ScalarProperty Name="DrawNoodlerID" ColumnName="DrawNoodlerID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DrawID" ColumnName="DrawID" />
+                <ScalarProperty Name="Winner" ColumnName="Winner" />
+                <ScalarProperty Name="DrawRating" ColumnName="DrawRating" />
+                <ScalarProperty Name="DoodlerRating" ColumnName="DoodlerRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userLogins">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.userLogin">
+              <MappingFragment StoreEntitySet="userLogin">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LoginDateTime" ColumnName="LoginDateTime" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="DB_42039_doodleModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Pword" ColumnName="Pword" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GatherOpenDraws" FunctionName="DB_42039_doodleModel.Store.sp_GatherOpenDraws">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_42039_doodleModel.sp_GatherOpenDraws_Result">
+                <ScalarProperty Name="DrawCategoryName" ColumnName="DrawCategoryName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Doodler" ColumnName="Doodler" />
+                <ScalarProperty Name="DrawStatusDesc" ColumnName="DrawStatusDesc" />
+                <ScalarProperty Name="DrawID" ColumnName="DrawID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

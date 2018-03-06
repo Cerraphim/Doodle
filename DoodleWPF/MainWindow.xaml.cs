@@ -156,7 +156,7 @@ namespace DoodleWPF
         public void WS_EndGame(DTO_DrawID drawid)
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            
+            drawid = ws.EndGame(drawid);
         }
 
         private List<DTO_GameCategory> WS_GetDrawCategories()
@@ -269,7 +269,7 @@ namespace DoodleWPF
             }
         }           
 
-        //REGISTER PAGE////////////////////////////////////////////////////////////////////////////////////
+        //REGISTER PAGE/////////////////////////////////////////////////////////////////////////////////
 
         public void DrawPage_Register()
         {
@@ -345,7 +345,7 @@ namespace DoodleWPF
             }
         }
 
-        //NOODLER LOBBY PAGE////////////////////////////////////////////////////////////////////////////////////
+        //NOODLER LOBBY PAGE/////////////////////////////////////////////////////////////////////////////
 
         public void DrawPage_NLobby()
         {
@@ -373,7 +373,7 @@ namespace DoodleWPF
             }
         }
 
-        //NOODLER GAME PAGE////////////////////////////////////////////////////////////////////////////////////
+        //NOODLER GAME PAGE///////////////////////////////////////////////////////////////////////////////
 
         public void DrawPage_NGame()
         {
@@ -397,6 +397,9 @@ namespace DoodleWPF
                 DTO_Winner winner = new DTO_Winner();
                 winner.NoodlerID = GV_Noodler.NoodlerID;
                 WS_SetWinner(winner);
+                DTO_DrawID drawid = new DTO_DrawID();
+                drawid.DrawID = GV_Draw.DrawID;
+                WS_EndGame(drawid);
             }
             else
             {
@@ -409,7 +412,7 @@ namespace DoodleWPF
             DrawPage_Home();
         }
 
-        //DOODLER LOBBY PAGE////////////////////////////////////////////////////////////////////////////////////
+        //DOODLER LOBBY PAGE//////////////////////////////////////////////////////////////////////////////
 
         private void DrawPage_DLobby()
         {

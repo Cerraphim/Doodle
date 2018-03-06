@@ -103,18 +103,91 @@ namespace DoodleWPF
             lv.ItemsSource = list;
         }
 
-        //LOGIN PAGE///////////////////////////////////////////////////////////////////////////////////
+        //WEB SERVICE FUNCTIONS///////////////////////////////////////////////////////////////////////
 
         private DTO_Users WS_Login(DTO_Login login)
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
             DTO_Users user = ws.Login(login);
-            if(user != null)
+            if (user != null)
             {
                 GV_User = user;
             }
-            return user;  
+            return user;
         }
+
+        public void WS_GatherOpenDraws()
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            GV_DrawList = ws.GatherOpenDraws().ToList();
+        }
+
+        public DTO_JoinDraw WS_JoinDraw(DTO_JoinDraw join)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            join = ws.JoinDraw(join);
+            if (join != null)
+            {
+                GV_Noodler = join;
+            }
+            return join;
+        }
+
+        public DTO_Users WS_RegisterUser(DTO_Users user)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            user = ws.AddUser(user);
+            return user;
+        }
+
+        public DTO_Guess WS_CheckGuess(DTO_Guess guess)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            guess = ws.CheckGuess(guess);
+            return guess;
+        }
+
+        public void WS_SetWinner(DTO_Winner winner)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            ws.SetWinner(winner);
+        }
+
+        public void WS_EndGame(DTO_DrawID drawid)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            
+        }
+
+        private List<DTO_GameCategory> WS_GetDrawCategories()
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            List<DTO_GameCategory> list = ws.GetDrawCategories().ToList();
+            return list;
+        }
+
+        private DTO_OpenDraws WS_CreateDraw(DTO_NewDraw draw)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            DTO_OpenDraws newdraw = new DTO_OpenDraws();
+            newdraw = ws.CreateDraw(draw);
+            return newdraw;
+        }
+
+        //UTILITY////////////////////////////////////////////////////////////////////////////////////
+
+        private void CollapsePages()
+        {
+            output.Visibility = Visibility.Collapsed;
+            Page_Login.Visibility = Visibility.Collapsed;
+            Page_Homepage.Visibility = Visibility.Collapsed;
+            Page_NLobby.Visibility = Visibility.Collapsed;
+            Page_DLobby.Visibility = Visibility.Collapsed;
+            Page_NGame.Visibility = Visibility.Collapsed;
+            Page_Register.Visibility = Visibility.Collapsed;
+        }
+
+        //LOGIN PAGE///////////////////////////////////////////////////////////////////////////////////
 
         private void DrawPage_Login()
         {
@@ -123,6 +196,12 @@ namespace DoodleWPF
             TBox_LoginPassword.Text = "";
             Page_Login.Visibility = Visibility.Visible;
             output.Visibility = Visibility.Visible;
+        }
+
+        public void BTN_LoginRegister_Click(object sender, RoutedEventArgs e)
+        {
+            output.Text = "";
+            DrawPage_Register();
         }
 
         private void BTN_LoginLogin_Click(object sender, RoutedEventArgs e)
@@ -164,6 +243,8 @@ namespace DoodleWPF
                 output.Text = "Invalid Login";
             }   
         }
+        
+        //HOME PAGE////////////////////////////////////////////////////////////////////////////////////
 
         private void DrawPage_Home()
         {
@@ -174,17 +255,21 @@ namespace DoodleWPF
             LV_HomePageDraws.ItemsSource = GV_DrawList;
         }
 
-        public void WS_GatherOpenDraws()
+        public void BTN_HomepageNew_Click(object sender, RoutedEventArgs e)
         {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            GV_DrawList = ws.GatherOpenDraws().ToList();         
+            DrawPage_DLobby();
         }
 
-        public void BTN_LoginRegister_Click(object sender, RoutedEventArgs e)
+        private void LV_HomePageDraws_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            output.Text = "";
-            DrawPage_Register();
-        }
+            if (LV_HomePageDraws.SelectedIndex > -1)
+            {
+                GV_Draw = GV_DrawList[LV_HomePageDraws.SelectedIndex];
+                DrawPage_NLobby();
+            }
+        }           
+
+        //REGISTER PAGE////////////////////////////////////////////////////////////////////////////////////
 
         public void DrawPage_Register()
         {
@@ -194,11 +279,6 @@ namespace DoodleWPF
             TBox_RegisterUserName.Text = "";
             TBox_RegistrationPicture.Text = "";
             Page_Register.Visibility = Visibility.Visible;
-        }
-
-        public void BTN_HomepageNew_Click(object sender, RoutedEventArgs e)
-        {
-            DrawPage_DLobby();
         }
 
         public void BTN_RegisterBack_Click(object sender, RoutedEventArgs e)
@@ -265,20 +345,19 @@ namespace DoodleWPF
             }
         }
 
-        public DTO_Users WS_RegisterUser(DTO_Users user)
+        //NOODLER LOBBY PAGE////////////////////////////////////////////////////////////////////////////////////
+
+        public void DrawPage_NLobby()
         {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            user = ws.AddUser(user);
-            return user;
+            CollapsePages();
+            Page_NLobby.Visibility = Visibility.Visible;
+            TBlock_NLobbyDoodler.Text = GV_Draw.Doodler;
+            TBlock_NLobbyCategory.Text = GV_Draw.DrawCategoryName;
         }
 
-        private void LV_HomePageDraws_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BTN_NLobbyBack_Click(object sender, RoutedEventArgs e)
         {
-            if (LV_HomePageDraws.SelectedIndex > -1)
-            {
-                GV_Draw = GV_DrawList[LV_HomePageDraws.SelectedIndex];
-                DrawPage_NLobby();          
-            }
+            DrawPage_Home();
         }
 
         private void BTN_NLobbyJoin_Click(object sender, RoutedEventArgs e)
@@ -288,26 +367,20 @@ namespace DoodleWPF
             join.UserID = GV_User.ID;
 
             join = WS_JoinDraw(join);
-            if(join != null)
+            if (join != null)
             {
                 DrawPage_NGame();
-            }   
-        }
-
-        public DTO_JoinDraw WS_JoinDraw(DTO_JoinDraw join)
-        {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            join = ws.JoinDraw(join);
-            if(join != null)
-            {
-                GV_Noodler = join;
             }
-            return join;
         }
 
-        private void BTN_NLobbyBack_Click(object sender, RoutedEventArgs e)
+        //NOODLER GAME PAGE////////////////////////////////////////////////////////////////////////////////////
+
+        public void DrawPage_NGame()
         {
-            DrawPage_Home();
+            CollapsePages();
+            Page_NGame.Visibility = Visibility.Visible;
+            TBox_NGameGuess.Text = "";
+            TBlock_NGameCategory.Text = GV_Draw.DrawCategoryName;
         }
 
         private void BTN_NGameGuess_Click(object sender, RoutedEventArgs e)
@@ -329,36 +402,14 @@ namespace DoodleWPF
             {
                 TBlock_NGameGuessTicker.Text = TBox_NGameGuess.Text;
             }        
-        }
-
-        public DTO_Guess WS_CheckGuess(DTO_Guess guess)
-        {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            guess = ws.CheckGuess(guess);
-            return guess;
-        }
-
-        public void WS_SetWinner(DTO_Winner winner)
-        {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            ws.SetWinner(winner);
-        }
+        }    
 
         private void BTN_NGameHome_Click(object sender, RoutedEventArgs e)
         {
             DrawPage_Home();
         }
 
-        private void CollapsePages()
-        {
-            output.Visibility = Visibility.Collapsed;
-            Page_Login.Visibility = Visibility.Collapsed;
-            Page_Homepage.Visibility = Visibility.Collapsed;
-            Page_NLobby.Visibility = Visibility.Collapsed;
-            Page_DLobby.Visibility = Visibility.Collapsed;
-            Page_NGame.Visibility = Visibility.Collapsed;
-            Page_Register.Visibility = Visibility.Collapsed;
-        }
+        //DOODLER LOBBY PAGE////////////////////////////////////////////////////////////////////////////////////
 
         private void DrawPage_DLobby()
         {
@@ -366,14 +417,7 @@ namespace DoodleWPF
             CBox_GGameCategory.ItemsSource = WS_GetDrawCategories();
             CBox_GGameCategory.SelectedIndex = 0;
             Page_DLobby.Visibility = Visibility.Visible;
-        }
-
-        private List<DTO_GameCategory> WS_GetDrawCategories()
-        {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            List<DTO_GameCategory> list = ws.GetDrawCategories().ToList();
-            return list;
-        }
+        }      
 
         private void BTN_DLobbyBack_Click(object sender, RoutedEventArgs e)
         {
@@ -393,21 +437,7 @@ namespace DoodleWPF
             DrawPage_DGame();
         }
 
-        private DTO_OpenDraws WS_CreateDraw(DTO_NewDraw draw)
-        {
-            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            DTO_OpenDraws newdraw = new DTO_OpenDraws();
-            newdraw = ws.CreateDraw(draw);
-            return newdraw;
-        }
-
-        public void DrawPage_NLobby()
-        {
-            CollapsePages();
-            Page_NLobby.Visibility = Visibility.Visible;
-            TBlock_NLobbyDoodler.Text = GV_Draw.Doodler;
-            TBlock_NLobbyCategory.Text = GV_Draw.DrawCategoryName;
-        }
+        //DOODLER GAME PAGE////////////////////////////////////////////////////////////////////////////////////
 
         public void DrawPage_DGame()
         {
@@ -425,12 +455,6 @@ namespace DoodleWPF
             DrawPage_Home();
         }      
 
-        public void DrawPage_NGame()
-        {
-            CollapsePages();
-            Page_NGame.Visibility = Visibility.Visible;
-            TBox_NGameGuess.Text = "";
-            TBlock_NGameCategory.Text = GV_Draw.DrawCategoryName;
-        }
+        
     }
 }

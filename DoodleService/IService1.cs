@@ -34,5 +34,7 @@ namespace DoodleService
         DTO_OpenDraws StartDraw(DTO_OpenDraws draw);
         [OperationContract]
         List<DTO_GameCategory> GetDrawCategories();
+        [OperationContract]
+        DTO_DrawID EndGame(DTO_DrawID drawid);
     }
 }

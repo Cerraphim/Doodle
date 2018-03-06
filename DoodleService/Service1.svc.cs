@@ -245,5 +245,14 @@ namespace DoodleService
             }
             
         }
+
+        public DTO_DrawID EndGame(DTO_DrawID drawid)
+        {
+            using (DB_42039_doodleEntities db = new DB_42039_doodleEntities())
+            {
+                db.draws.Find(drawid.DrawID).DrawStatusId = 3;
+            }
+            return drawid;
+        }
     }
 }

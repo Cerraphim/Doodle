@@ -103,6 +103,7 @@
     <None Include="Connected Services\ServiceReference1\Service12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\DoodleModel.DTO_DrawID.datasource" />
     <None Include="Properties\DataSources\DoodleModel.DTO_GameCategory.datasource" />
     <None Include="Properties\DataSources\DoodleModel.DTO_Guess.datasource" />
     <None Include="Properties\DataSources\DoodleModel.DTO_JoinDraw.datasource" />

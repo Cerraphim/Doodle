@@ -86,4 +86,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTO_GameCategory" nillable="true" type="tns:DTO_GameCategory" />
+  <xs:complexType name="DTO_DrawID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DrawID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_DrawID" nillable="true" type="tns:DTO_DrawID" />
 </xs:schema>

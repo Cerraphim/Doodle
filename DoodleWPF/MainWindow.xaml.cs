@@ -35,6 +35,22 @@ namespace DoodleWPF
             //TestWebService();
         }
 
+        public sealed class S_Draw
+        {
+            private static readonly S_Draw instance = new S_Draw();
+
+            private S_Draw() { }
+
+            public static S_Draw Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public int test;
+        }
+
         private void TestWebService()
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
@@ -50,7 +66,6 @@ namespace DoodleWPF
                 Debug.WriteLine(user.DisplayName);
             else
                 Debug.WriteLine("Invalid login");
-
 
             var openDraws = ws.GatherOpenDraws();
 
@@ -140,6 +155,13 @@ namespace DoodleWPF
             return user;
         }
 
+        public DTO_OpenDraws WS_StartDraw(DTO_OpenDraws draw)
+        {
+            ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
+            draw = ws.StartDraw(draw);
+            return draw;
+        }
+
         public DTO_Guess WS_CheckGuess(DTO_Guess guess)
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
@@ -153,10 +175,10 @@ namespace DoodleWPF
             ws.SetWinner(winner);
         }
 
-        public void WS_EndGame(DTO_DrawID drawid)
+        public void WS_EndDraw(DTO_DrawID drawid)
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
-            drawid = ws.EndGame(drawid);
+            drawid = ws.EndDraw(drawid);
         }
 
         private List<DTO_GameCategory> WS_GetDrawCategories()
@@ -399,7 +421,7 @@ namespace DoodleWPF
                 WS_SetWinner(winner);
                 DTO_DrawID drawid = new DTO_DrawID();
                 drawid.DrawID = GV_Draw.DrawID;
-                WS_EndGame(drawid);
+                WS_EndDraw(drawid);
                 
             }
             else
@@ -437,7 +459,16 @@ namespace DoodleWPF
             draw.DrawCategoryID = 1;
 
             DTO_OpenDraws newdraw = WS_CreateDraw(draw);
+            GV_Draw = newdraw;
 
+            /*
+            while(GV_Draw.StartTime > System.DateTime.Now)
+            {
+                TBlock_GGameStartTimer.Text = (GV_Draw.StartTime - System.DateTime.Now).ToString();
+            }
+            */
+
+            newdraw = WS_StartDraw(newdraw);
             DrawPage_DGame();
         }
 

@@ -81,11 +81,11 @@ namespace DoodleWPF.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrawCategories", ReplyAction="http://tempuri.org/IService1/GetDrawCategoriesResponse")]
         System.Threading.Tasks.Task<DoodleModel.DTO_GameCategory[]> GetDrawCategoriesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndGame", ReplyAction="http://tempuri.org/IService1/EndGameResponse")]
-        DoodleModel.DTO_DrawID EndGame(DoodleModel.DTO_DrawID drawid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndDraw", ReplyAction="http://tempuri.org/IService1/EndDrawResponse")]
+        DoodleModel.DTO_DrawID EndDraw(DoodleModel.DTO_DrawID drawid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndGame", ReplyAction="http://tempuri.org/IService1/EndGameResponse")]
-        System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndGameAsync(DoodleModel.DTO_DrawID drawid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndDraw", ReplyAction="http://tempuri.org/IService1/EndDrawResponse")]
+        System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndDrawAsync(DoodleModel.DTO_DrawID drawid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -203,12 +203,12 @@ namespace DoodleWPF.ServiceReference1 {
             return base.Channel.GetDrawCategoriesAsync();
         }
         
-        public DoodleModel.DTO_DrawID EndGame(DoodleModel.DTO_DrawID drawid) {
-            return base.Channel.EndGame(drawid);
+        public DoodleModel.DTO_DrawID EndDraw(DoodleModel.DTO_DrawID drawid) {
+            return base.Channel.EndDraw(drawid);
         }
         
-        public System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndGameAsync(DoodleModel.DTO_DrawID drawid) {
-            return base.Channel.EndGameAsync(drawid);
+        public System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndDrawAsync(DoodleModel.DTO_DrawID drawid) {
+            return base.Channel.EndDrawAsync(drawid);
         }
     }
 }

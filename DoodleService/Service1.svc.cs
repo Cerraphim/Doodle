@@ -211,11 +211,15 @@ namespace DoodleService
                 sqlobj.CategoryID = draw.DrawCategoryID;
                 sqlobj.DoodlerUserID = draw.DoodlerID;
                 sqlobj.Answer = "1";
-                sqlobj.DrawStatusId = 1;
-                sqlobj.StartTime = new DateTime();
-
+                sqlobj.DrawStatusId = 1;           
+                sqlobj.StartTime = System.DateTime.Now.AddMinutes(10);
                 db.draws.Add(sqlobj);
                 db.SaveChanges();
+
+                opendraw.DrawID = sqlobj.DrawID;
+                opendraw.StartTime = sqlobj.StartTime.Value;
+                
+
 
                 return opendraw;
             }
@@ -223,7 +227,11 @@ namespace DoodleService
 
         public DTO_OpenDraws StartDraw(DTO_OpenDraws draw)
         {
-
+            using (DB_42039_doodleEntities db = new DB_42039_doodleEntities())
+            {
+                db.draws.Where(c => c.DrawID.Equals(draw.DrawID)).FirstOrDefault().DrawStatusId = 2;
+                db.SaveChanges();
+            }
             return draw;
         }
 
@@ -246,11 +254,12 @@ namespace DoodleService
             
         }
 
-        public DTO_DrawID EndGame(DTO_DrawID drawid)
+        public DTO_DrawID EndDraw(DTO_DrawID drawid)
         {
             using (DB_42039_doodleEntities db = new DB_42039_doodleEntities())
             {
-                db.draws.Find(drawid.DrawID).DrawStatusId = 3;
+                db.draws.Where(c => c.DrawID.Equals(drawid.DrawID)).FirstOrDefault().DrawStatusId = 3;
+                db.SaveChanges();
             }
             return drawid;
         }

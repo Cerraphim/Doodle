@@ -149,17 +149,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EndGame">
+  <xs:element name="EndDraw">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="drawid" nillable="true" type="q18:DTO_DrawID" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EndGameResponse">
+  <xs:element name="EndDrawResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="EndGameResult" nillable="true" type="q19:DTO_DrawID" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="EndDrawResult" nillable="true" type="q19:DTO_DrawID" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

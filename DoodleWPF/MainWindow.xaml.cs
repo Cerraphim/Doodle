@@ -400,6 +400,7 @@ namespace DoodleWPF
                 DTO_DrawID drawid = new DTO_DrawID();
                 drawid.DrawID = GV_Draw.DrawID;
                 WS_EndGame(drawid);
+                
             }
             else
             {

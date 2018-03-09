@@ -96,8 +96,8 @@ namespace DoodleService
 
                     userLogin sqlobj = new userLogin();
                     sqlobj.UserID = sqlrecord.UserID;
-                    sqlobj.Latitude = 300;
-                    sqlobj.Longitude = 400;
+                    sqlobj.Latitude = login.Latitude;
+                    sqlobj.Longitude = login.Longitude;
                     sqlobj.LoginDateTime = System.DateTime.Now;
 
                     db.userLogins.Add(sqlobj);

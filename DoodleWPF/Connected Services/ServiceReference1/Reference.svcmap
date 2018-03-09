@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:54563/Service1.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://www.jumpcreek.com/doodle/Service1.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="899e32db-7874-4509-aeeb-3111ffc3d492" SourceId="1" SourceUrl="http://localhost:54563/Service1.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="4ae8b1b8-c592-490c-83b5-a7703aeea7c4" SourceId="1" SourceUrl="http://localhost:54563/Service1.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="84b20481-4d8a-45c5-8a68-c1b3029f952b" SourceId="1" SourceUrl="http://localhost:54563/Service1.svc?xsd=xsd0" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="f3edf373-9484-4e96-9293-076441800157" SourceId="1" SourceUrl="http://localhost:54563/Service1.svc?wsdl" />
-    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="2a247656-c203-41e6-883c-265bd39efff6" SourceId="1" SourceUrl="http://localhost:54563/Service1.svc?disco" />
+    <MetadataFile FileName="Service13.xsd" MetadataType="Schema" ID="6e4f7f24-4bab-4c20-a2e6-03128239c246" SourceId="1" SourceUrl="http://www.jumpcreek.com/doodle/Service1.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service131.xsd" MetadataType="Schema" ID="84672ef6-0fd5-46e9-9fc6-21169e97e1cb" SourceId="1" SourceUrl="http://www.jumpcreek.com/doodle/Service1.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="7983fe07-6d54-4e5a-84a4-b15033979835" SourceId="1" SourceUrl="http://www.jumpcreek.com/doodle/Service1.svc?wsdl" />
+    <MetadataFile FileName="Service132.xsd" MetadataType="Schema" ID="8db98610-c823-4f1b-b5ff-0ec05914367b" SourceId="1" SourceUrl="http://www.jumpcreek.com/doodle/Service1.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service11.disco" MetadataType="Disco" ID="d7dfefbc-5292-498c-93b8-ba3cb8b0d537" SourceId="1" SourceUrl="http://www.jumpcreek.com/doodle/Service1.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

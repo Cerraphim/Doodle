@@ -35,6 +35,27 @@ namespace DoodleWPF
             //TestWebService();
         }
 
+        //SINGLETON GLOBAL VARIABLES///////////////////////////////////////////////////////////////
+
+        public sealed class S_User
+        {
+            private static readonly S_User instance = new S_User();
+
+            private S_User() { }
+
+            public static S_User Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public int userID;
+            public string displayName;
+            public string emailAddress;
+            public string picture;
+        }
+
         public sealed class S_Draw
         {
             private static readonly S_Draw instance = new S_Draw();
@@ -48,11 +69,50 @@ namespace DoodleWPF
                     return instance;
                 }
             }
-            public int test;
+            public int drawID;
+            public int doodleUserID;
+            public int categoryID;
+            public DateTime startTime;
+            public int drawStatusID;
         }
+
+        public sealed class S_DrawList
+        {
+            private static readonly S_DrawList instance = new S_DrawList();
+
+            private S_DrawList() { }
+
+            public static S_DrawList Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public List<DTO_OpenDraws> drawList;
+        }
+
+        public sealed class S_Noodler
+        {
+            private static readonly S_Noodler instance = new S_Noodler();
+
+            private S_Noodler() { }
+
+            public static S_Noodler Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public int drawNoodlerID;
+        }
+
+        //CLASS EXAMPLE FUNCTIONS///////////////////////////////////////////////////////////////
 
         private void TestWebService()
         {
+            S_User.Instance.displayName = ":";
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
 
             DTO_Login login = new DTO_Login();
@@ -127,6 +187,10 @@ namespace DoodleWPF
             if (user != null)
             {
                 GV_User = user;
+                S_User.Instance.emailAddress = user.EmailAddress;
+                S_User.Instance.displayName = user.DisplayName;
+                S_User.Instance.userID = user.ID;
+                S_User.Instance.picture = user.Picture;
             }
             return user;
         }
@@ -135,6 +199,7 @@ namespace DoodleWPF
         {
             ServiceReference1.Service1Client ws = new ServiceReference1.Service1Client();
             GV_DrawList = ws.GatherOpenDraws().ToList();
+            S_DrawList.Instance.drawList = GV_DrawList;
         }
 
         public DTO_JoinDraw WS_JoinDraw(DTO_JoinDraw join)
@@ -144,6 +209,7 @@ namespace DoodleWPF
             if (join != null)
             {
                 GV_Noodler = join;
+                S_Noodler.Instance.drawNoodlerID = join.NoodlerID;
             }
             return join;
         }
@@ -489,7 +555,6 @@ namespace DoodleWPF
         {
             DrawPage_Home();
         }      
-
-        
+   
     }
 }

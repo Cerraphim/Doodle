@@ -46,7 +46,6 @@ namespace DoodleModel
         [DataMember]
         public float Longitude { get; set; }
     }
-
     [DataContract]
     public class DTO_OpenDraws
     {

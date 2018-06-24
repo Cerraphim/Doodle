@@ -327,8 +327,25 @@ namespace DoodleService
                     list.Add(gamecategory);
                 }
                 return list;
+            }         
+        }
+
+        public List<DTO_GameStatus> GetGameStatuses()
+        {
+            List<DTO_GameStatus> list = new List<DTO_GameStatus>();
+            using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
+            {
+                var sqllist = db.drawStatus.ToList();
+                foreach (var s in sqllist)
+                {
+                    DTO_GameStatus gameStatus = new DTO_GameStatus();
+                    gameStatus.GameStatusID = s.DrawStatusID;
+                    gameStatus.GameStatusDesc = s.DrawStatusDesc;
+
+                    list.Add(gameStatus);
+                }
+                return list;
             }
-            
         }
 
         public List<DTO_LineCount> GetLineCount(DTO_DrawID drawid)

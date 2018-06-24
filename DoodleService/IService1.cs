@@ -70,6 +70,11 @@ namespace DoodleService
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
+        List<DTO_GameStatus> GetGameStatuses();
+
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
+        [return: MessageParameter(Name = "Data")]
+        [OperationContract]
         List<DTO_DrawID> EndDraw(DTO_DrawID drawid);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]

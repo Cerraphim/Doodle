@@ -110,7 +110,39 @@ namespace Lab
             }
             public int drawNoodlerID;
         }
+        
+        public sealed class S_GameCategories
+        {
+            private static readonly S_GameCategories instance = new S_GameCategories();
 
+            private S_GameCategories() { }
+
+            public static S_GameCategories Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public List<DTO_GameCategory> gameCategoryList;
+        }
+
+        public sealed class S_GameStatuses
+        {
+            private static readonly S_GameStatuses instance = new S_GameStatuses();
+
+            private S_GameStatuses() { }
+
+            public static S_GameStatuses Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+            public List<DTO_GameStatus> gameStatusList;
+        }
+        
         //CLASS EXAMPLE FUNCTIONS///////////////////////////////////////////////////////////////
 
         private void StartFetchingData()
@@ -124,35 +156,8 @@ namespace Lab
         private async void Timer_Tick(object sender, EventArgs e)
         {
             (sender as DispatcherTimer).Stop();
-
             await PullLines();
-
-            lastFetch.Text = string.Format("{0}", DateTime.Now);
-
             (sender as DispatcherTimer).Start();
-        }
-
-        public async Task GetLineCount()
-        {
-            try
-            {
-                DTO_DrawID temp = new DTO_DrawID();
-                temp.DrawID = S_Draw.Instance.drawID;
-                HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "GetLineCount"), temp);
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_LineCount>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_LineCount>));
-                var countList = des.Data.ToList();
-
-                if (countList.Count > 0)
-                {
-                    lineCount.Text = countList.First().lineCount.ToString();
-                }
-            }
-            catch (HttpRequestException hre)
-            {
-                Debug.WriteLine(hre.Message);
-            }
         }
 
         private async Task PostLine(Point p1, Point p2)
@@ -163,7 +168,6 @@ namespace Lab
             line.DrawPointY = p1.Y;
             line.DrawPointX2 = p2.X;
             line.DrawPointY2 = p2.Y;
-
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "PushLine"), line);
@@ -173,20 +177,6 @@ namespace Lab
             {
                 Debug.WriteLine(hre.Message);
             }
-            await PullLines();
-            await GetLineCount();
-        }
-
-        private async void Push_Click(object sender, RoutedEventArgs e)
-        {
-            var p1 = new Point(10, 20);
-            var p2 = new Point(20, 30);
-
-            await PostLine(p1, p2);
-        }
-
-        private async void Pull_Click(object sender, RoutedEventArgs e)
-        {
             await PullLines();
         }
 
@@ -201,12 +191,8 @@ namespace Lab
                 var json = await response.Content.ReadAsStringAsync();
                 var des = (Wrapper<DTO_DrawPoints>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_DrawPoints>));
                 var pointsList = des.Data.ToList();
-                listviewLines.ItemsSource = pointsList;
-
-                await GetLineCount();
 
                 Noodlerplot.Children.Clear();
-
                 int x = 0;
                 foreach( var p in pointsList)
                 {
@@ -286,9 +272,6 @@ namespace Lab
                 var json = await response.Content.ReadAsStringAsync();
                 var des = (Wrapper<DTO_DrawPoints>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_DrawPoints>));
                 var pointsList = des.Data.ToList();
-
-                listviewLines.ItemsSource = pointsList;
-                await GetLineCount();
             }
             catch (HttpRequestException hre)
             {
@@ -358,7 +341,7 @@ namespace Lab
                 var json = await response.Content.ReadAsStringAsync();
                 var des = (Wrapper<DTO_Users>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_Users>));
                 var userList = des.Data.ToList();
-                listviewUsers.ItemsSource = userList;
+                //listviewUsers.ItemsSource = userList;
             }
             catch (HttpRequestException hre)
             {
@@ -506,8 +489,9 @@ namespace Lab
             return drawid;
         }
 
-        private async Task<List<DTO_GameCategory>> WS_GetDrawCategories(DTO_GameCategory gameCategory)
+        public async Task<List<DTO_GameCategory>> WS_GetDrawCategories()
         {
+            DTO_GameCategory gameCategory = new DTO_GameCategory();
             List<DTO_GameCategory> gameCategoryList = new List<DTO_GameCategory>();
             try
             {
@@ -529,10 +513,39 @@ namespace Lab
             {
                 Debug.WriteLine(hre.Message);
             }
+            S_GameCategories.Instance.gameCategoryList = gameCategoryList;
             return gameCategoryList;
         }
 
-        private async Task<DTO_OpenDraws> WS_CreateDraw(DTO_NewDraw draw)
+        public async Task<List<DTO_GameStatus>> WS_GetGameStatuses()
+        {
+            DTO_GameStatus gameStatus = new DTO_GameStatus();
+            List<DTO_GameStatus> gameStatusList = new List<DTO_GameStatus>();
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "GetGameStatuses"), gameStatus);
+                response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync();
+                var des = (Wrapper<DTO_GameStatus>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_GameStatus>));
+                var tempGameStatusList = des.Data.ToList();
+
+                foreach (var s in tempGameStatusList)
+                {
+                    DTO_GameStatus newGameStatus = new DTO_GameStatus();
+                    newGameStatus.GameStatusID = s.GameStatusID;
+                    newGameStatus.GameStatusDesc = s.GameStatusDesc;
+                    gameStatusList.Add(newGameStatus);
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                Debug.WriteLine(hre.Message);
+            }
+            S_GameStatuses.Instance.gameStatusList = gameStatusList;
+            return gameStatusList;
+        }
+
+        public async Task<DTO_OpenDraws> WS_CreateDraw(DTO_NewDraw draw)
         {
             DTO_OpenDraws openDraw = new DTO_OpenDraws();
             try
@@ -564,9 +577,11 @@ namespace Lab
             output.Visibility = Visibility.Collapsed;
             Page_Login.Visibility = Visibility.Collapsed;
             Page_Homepage.Visibility = Visibility.Collapsed;
+            BTN_HomepageJoin.Visibility = Visibility.Collapsed;
             Page_NLobby.Visibility = Visibility.Collapsed;
             Page_DLobby.Visibility = Visibility.Collapsed;
             Page_NGame.Visibility = Visibility.Collapsed;
+            BTN_NGameHome.Visibility = Visibility.Collapsed;
             Page_DGame.Visibility = Visibility.Collapsed;
             Page_Register.Visibility = Visibility.Collapsed;
         }
@@ -605,6 +620,8 @@ namespace Lab
                     S_User.Instance.displayName = user.DisplayName;
                     S_User.Instance.emailAddress = user.EmailAddress;
                     S_User.Instance.picture = user.Picture;
+                    await WS_GetGameStatuses();
+                    await WS_GetDrawCategories();
                     DrawPage_Home();
                 }
                 else
@@ -641,7 +658,7 @@ namespace Lab
             CollapsePages();
             Page_Homepage.Visibility = Visibility.Visible;
             BTN_HomepageJoin.Visibility = Visibility.Hidden;
-            TBlock_HomepageUser.Text = S_User.Instance.displayName;
+            TBlock_HomepageUser.Text = S_User.Instance.displayName;          
             await WS_GatherOpenDraws();
             LV_HomePageDraws.ItemsSource = S_DrawList.Instance.drawList;
             LV_HomePageDraws.SelectedIndex = -1;
@@ -792,7 +809,6 @@ namespace Lab
             timer.Interval = new TimeSpan(0, 0, 5);
             timer.Tick += Timer_Tick;
 
-            await GetLineCount();
             await PullLines();
 
             timer.Start();
@@ -831,11 +847,10 @@ namespace Lab
 
         //DOODLER LOBBY PAGE//////////////////////////////////////////////////////////////////////////////
 
-        private async void DrawPage_DLobby()
+        private void DrawPage_DLobby()
         {
             CollapsePages();
-            DTO_GameCategory gameCategory = new DTO_GameCategory();
-            CBox_GGameCategory.ItemsSource = await WS_GetDrawCategories(gameCategory);
+            CBox_GGameCategory.ItemsSource = S_GameCategories.Instance.gameCategoryList;
             CBox_GGameCategory.SelectedIndex = -1;
             Page_DLobby.Visibility = Visibility.Visible;
         }
@@ -875,7 +890,7 @@ namespace Lab
 
         //DOODLER GAME PAGE////////////////////////////////////////////////////////////////////////////////////
 
-        public async void DrawPage_DGame()
+        public void DrawPage_DGame()
         {
             CollapsePages();
             Page_DGame.Visibility = Visibility.Visible;
@@ -883,10 +898,6 @@ namespace Lab
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 5);
             timer.Tick += Timer_Tick;
-
-            await GetLineCount();
-            await PullLines();
-
             timer.Start();
         }
 
@@ -899,6 +910,5 @@ namespace Lab
         {
             DrawPage_Home();
         }
-
     }
 }

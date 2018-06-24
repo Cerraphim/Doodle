@@ -11,202 +11,111 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight">
     <StackPanel>
-        <TabControl>
-            <TabItem Header="Test">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" >
-                        <Button Margin="20,20,0,0" Click="Push_Click" >
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images/bill-gates.jpg" Height="40" Width="40" />
-                                    <TextBlock FontSize="20" Text="Push Lines" VerticalAlignment="Center" Margin="10,0,0,0" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <TextBlock Margin="20,10,0,0"
-                       VerticalAlignment="Center"
-                       x:Name="lineCount" FontSize="20" />
-                        <Button Margin="20,20,0,0" Click="Pull_Click" >
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images/miranda-lambert.jpg" Height="40" Width="40" />
-                                    <TextBlock FontSize="20" Text="Pull Lines" VerticalAlignment="Center" Margin="10,0,0,0" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button Margin="20,20,0,0" Content="Erase" Click="Erase_Click" >
-
-                        </Button>
-                        <TextBlock Margin="20,20,0,0" x:Name="lastFetch" HorizontalAlignment="Left" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="1"  >
-                        <TextBlock Text="User List" HorizontalAlignment="Left" />
-                        <ListView x:Name="listviewUsers" 
-                    MaxHeight="500"
-                    MinWidth="200" 
-                  >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock FontSize="16" Text="{Binding DisplayName}" >
-                                        </TextBlock>
-                                    </StackPanel>
-
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1"  >
-                        <TextBlock Text="Line Segments" HorizontalAlignment="Left" Margin="0,10,0,0" />
-                        <ListView x:Name="listviewLines" 
-                    MaxHeight="500"
-                    MinWidth="200" 
-                  >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock Margin="10,0,0,0" FontSize="14" Text="{Binding DisplayPoint}" >
-                                        </TextBlock>
-                                    </StackPanel>
-
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-
-                        </ListView>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="5,0,10,9" >
-
-                        <TextBlock Text="Drawing" HorizontalAlignment="Left" Margin="0,10,0,0" />
-
-                        <Canvas x:Name="plot2" Background="Beige" Grid.Row="1" Grid.Column="2" 
-            Width="600" 
-            Height="500" 
-            MouseDown="plot_MouseDown"
-                    ></Canvas>
-
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="App">
-                <StackPanel x:Name="applicationwindow" Orientation="Vertical" >
-                    <StackPanel x:Name="Page_Login" Orientation="Vertical" >
-                        <TextBlock HorizontalAlignment="Center" Text="Email:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_LoginEmail" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Password:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_LoginPassword" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <Button x:Name="BTN_LoginLogin" Click="BTN_LoginLogin_Click" Content="Login" Width="200" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                        <Button x:Name="BTN_LoginRegister" Click="BTN_LoginRegister_Click" Content="Register" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10"/>
-                    </StackPanel>
-                    <StackPanel x:Name="Page_Homepage" 
+        <StackPanel x:Name="applicationwindow" Orientation="Vertical" >
+            <StackPanel x:Name="Page_Login" Orientation="Vertical" >
+                <TextBlock HorizontalAlignment="Center" Text="Email:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_LoginEmail" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="Password:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_LoginPassword" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <Button x:Name="BTN_LoginLogin" Click="BTN_LoginLogin_Click" Content="Login" Width="200" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                <Button x:Name="BTN_LoginRegister" Click="BTN_LoginRegister_Click" Content="Register" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+            </StackPanel>
+            <StackPanel x:Name="Page_Homepage" 
                                 Orientation="Vertical" Visibility="Collapsed">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="User: " />
-                            <TextBlock x:Name="TBlock_HomepageUser" Text="" Width="100"/>
-                        </StackPanel>
-                        <TextBlock Text="Draws:"/>
-                        <ListView x:Name="LV_HomePageDraws" Width="200" Height="200" SelectionChanged="LV_HomePageDraws_SelectionChanged"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="User: " />
+                    <TextBlock x:Name="TBlock_HomepageUser" Text="" Width="100"/>
+                </StackPanel>
+                <TextBlock Text="Draws:"/>
+                <ListView x:Name="LV_HomePageDraws" Width="200" Height="200" SelectionChanged="LV_HomePageDraws_SelectionChanged"
                                   DisplayMemberPath="Doodler" />
-                        <Button x:Name="BTN_HomepageNew" Click="BTN_HomepageNew_Click" Content="New" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10"/>
-                        <Button x:Name="BTN_HomepageJoin" Click="BTN_HomepageJoin_Click" Content="Join" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10" Visibility="Hidden"/>
-                                
-                    </StackPanel>
-                    <StackPanel x:Name="Page_Register" Orientation="Vertical" Visibility="Collapsed">
-                        <TextBlock HorizontalAlignment="Center" Text="Email:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_RegisterEmail" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Password:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_RegisterPassword" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="User Name:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_RegisterUserName" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Picture:" Margin="0,10,0,0"/>
-                        <TextBox x:Name="TBox_RegistrationPicture" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="BTN_RegisterBack" Click="BTN_RegisterBack_Click" 
+                <Button x:Name="BTN_HomepageNew" Click="BTN_HomepageNew_Click" Content="New" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+                <Button x:Name="BTN_HomepageJoin" Click="BTN_HomepageJoin_Click" Content="Join" Width="200" HorizontalAlignment="Center" Margin="0,10,0,10" Visibility="Hidden"/>
+            </StackPanel>
+            <StackPanel x:Name="Page_Register" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Center" Text="Email:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_RegisterEmail" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="Password:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_RegisterPassword" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="User Name:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_RegisterUserName" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Text="Picture:" Margin="0,10,0,0"/>
+                <TextBox x:Name="TBox_RegistrationPicture" Width="200" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BTN_RegisterBack" Click="BTN_RegisterBack_Click" 
                                 Content="Back" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                            <Button x:Name="BTN_RegisterSubmit" Click="BTN_RegisterSubmit_Click" 
+                    <Button x:Name="BTN_RegisterSubmit" Click="BTN_RegisterSubmit_Click" 
                                 Content="Submit" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel x:Name="Page_NLobby" Orientation="Vertical" Visibility="Collapsed">
-                        <TextBlock x:Name="TBlock_NLobbyDoodler" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
-                        <TextBlock x:Name="TBlock_NLobbyCategory" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
-                        <TextBlock x:Name="TBlock_NLobbyStartTime" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
-                        <Button x:Name="BTN_NLobbyBack" Click="BTN_NLobbyBack_Click"
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="Page_NLobby" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock x:Name="TBlock_NLobbyDoodler" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
+                <TextBlock x:Name="TBlock_NLobbyCategory" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
+                <TextBlock x:Name="TBlock_NLobbyStartTime" HorizontalAlignment="Center" Text="" Margin="0,10,0,0"/>
+                <Button x:Name="BTN_NLobbyBack" Click="BTN_NLobbyBack_Click"
                                 Content="Back" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                        <Button x:Name="BTN_NLobbyJoin" Click="BTN_NLobbyJoin_Click"
+                <Button x:Name="BTN_NLobbyJoin" Click="BTN_NLobbyJoin_Click"
                                 Content="Join" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                    </StackPanel>
-                    <StackPanel x:Name="Page_DLobby" Orientation="Vertical" Visibility="Collapsed">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="TBlock_GGameCategory" HorizontalAlignment="Center" Text="Category: " Margin="0,10,0,0"/>
-                            <ComboBox x:Name="CBox_GGameCategory" Width="200"
-                                      DisplayMemberPath ="CategoryName">
-                            </ComboBox>
-                            <TextBlock x:Name="TBlock_GGameStartDelay" HorizontalAlignment="Center" Text="Start Delay: " Margin="0,10,0,0"/>
-                            <ComboBox x:Name="CBox_GGameStartDelay" Width="200"
-                                      SelectedIndex="0">
-                                <ComboBoxItem Content="1"/>
-                                <ComboBoxItem Content="2"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="4"/>
-                                <ComboBoxItem Content="5"/>
-                            </ComboBox>
-                            <TextBlock x:Name="TBlock_GGameStartTimer" HorizontalAlignment="Center" Text="Start In:" Margin="0,10,0,0"/>
-                            <TextBlock x:Name="TBlock_GGameAnswer" HorizontalAlignment="Center" Text="Answer:" Margin="0,10,0,0"/>
-                            <TextBox x:Name="TBox_GGameAnswer" Width="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                            
-                        </StackPanel>
-                        <Button x:Name="BTN_DLobbyBack" Click="BTN_DLobbyBack_Click"
+            </StackPanel>
+            <StackPanel x:Name="Page_DLobby" Orientation="Vertical" Visibility="Collapsed" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                    <TextBlock x:Name="TBlock_GGameCategory" HorizontalAlignment="Left" Text="Category: " Margin="0,0,0,0"/>
+                    <ComboBox x:Name="CBox_GGameCategory" Width="200"
+                                      DisplayMemberPath ="CategoryName" HorizontalAlignment="Right" Margin="10,0,0,0">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                    <TextBlock x:Name="TBlock_GGameStartDelay" HorizontalAlignment="Left" Text="Start Delay: " Margin="0,0,0,0"/>
+                    <ComboBox x:Name="CBox_GGameStartDelay" Width="200"
+                                      SelectedIndex="0" HorizontalAlignment="Right" Margin="10,0,0,0">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                    <TextBlock x:Name="TBlock_GGameAnswer" HorizontalAlignment="Center" Text="Answer:" Margin="0,0,0,0"/>
+                    <TextBox x:Name="TBox_GGameAnswer" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="15,5,5,5">
+                    <Button x:Name="BTN_DLobbyBack" Click="BTN_DLobbyBack_Click"
                                 Content="Back" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                        <Button x:Name="BTN_DLobbySubmit" Click="BTN_DLobbySubmit_Click"
-                                Content="Create" Width="100" HorizontalAlignment="Center" Margin="5,10,5,10"/>
-                    </StackPanel>
-                    <StackPanel x:Name="Page_NGame" Orientation="Vertical" Visibility="Collapsed">
-                        <TextBlock x:Name="TBlock_NGameCategory" HorizontalAlignment="Center" Text="Category: " Margin="0,10,0,0"/>
-                        <StackPanel Height="200" Width="200" />
-                        <Canvas x:Name="Noodlerplot" Background="Beige" Grid.Row="1" Grid.Column="2" 
+                    <Button x:Name="BTN_DLobbySubmit" Click="BTN_DLobbySubmit_Click"
+                                Content="Create" Width="100" HorizontalAlignment="Center" Margin="0,10,5,10"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="Page_NGame" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock x:Name="TBlock_NGameCategory" HorizontalAlignment="Center" Text="Category: " Margin="0,10,0,0"/>
+                <StackPanel Height="200" Width="200" />
+                <Canvas x:Name="Noodlerplot" Background="Beige" Grid.Row="1" Grid.Column="2" 
                             Width="600" 
                             Height="500">
-                        </Canvas>
-                        <TextBlock x:Name="TBlock_NGameGuessTicker" HorizontalAlignment="Center" Text="Ticker: " Margin="0,10,0,0"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox x:Name="TBox_NGameGuess" Width="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                            <Button x:Name="BTN_NGameGuess" Click="BTN_NGameGuess_Click"
+                </Canvas>
+                <TextBlock x:Name="TBlock_NGameGuessTicker" HorizontalAlignment="Center" Text="Ticker: " Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="TBox_NGameGuess" Width="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <Button x:Name="BTN_NGameGuess" Click="BTN_NGameGuess_Click"
                                     Content="Guess" Width="50" HorizontalAlignment="Right" Margin="5,10,5,10"/>
-                            <Button x:Name="BTN_NGameHome" Click="BTN_NGameHome_Click" Visibility="Collapsed"
+                    <Button x:Name="BTN_NGameHome" Click="BTN_NGameHome_Click" Visibility="Collapsed"
                                     Content="Home" Width="50" HorizontalAlignment="Right" Margin="5,10,5,10"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel x:Name="Page_DGame" Orientation="Vertical" Visibility="Collapsed">
-                        <TextBlock Text="Drawing" HorizontalAlignment="Left" Margin="0,10,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="Page_DGame" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock Text="Drawing" HorizontalAlignment="Left" Margin="0,10,0,0" />
 
-                        <Canvas x:Name="plot" Background="Beige" Grid.Row="1" Grid.Column="2" 
+                <Canvas x:Name="plot" Background="Beige" Grid.Row="1" Grid.Column="2" 
                             Width="600" 
                             Height="500" 
                             MouseDown="plot_MouseDown">
-                        </Canvas>
-                        <Button x:Name="BTN_DGameQuit" Click="BTN_DGameQuit_Click"
+                </Canvas>
+                <Button x:Name="BTN_DGameQuit" Click="BTN_DGameQuit_Click"
                                     Content="Quit" Width="50" HorizontalAlignment="Right" Margin="5,10,5,10"/>
-                        <Button x:Name="BTN_DGameReturn" Click="BTN_DGameReturn_Click"
+                <Button x:Name="BTN_DGameReturn" Click="BTN_DGameReturn_Click"
                                     Content="Return" Width="50" HorizontalAlignment="Right" Margin="5,10,5,10"/>
-                    </StackPanel>
-                    <TextBlock Margin="0,40,0,0" x:Name="output" HorizontalAlignment="Center" />
-                </StackPanel>
-            </TabItem>
-        </TabControl>
+            </StackPanel>
+            <TextBlock Margin="0,40,0,0" x:Name="output" HorizontalAlignment="Center" />
+        </StackPanel>
     </StackPanel>
-    
-
 </Window>

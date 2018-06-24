@@ -125,11 +125,5 @@
       <Name>DoodleModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\bill-gates.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\miranda-lambert.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

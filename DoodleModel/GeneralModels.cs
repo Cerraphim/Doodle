@@ -87,6 +87,14 @@ namespace DoodleModel
         public string CategoryName { get; set; }
     }
     [DataContract]
+    public class DTO_GameStatus
+    {
+        [DataMember]
+        public int GameStatusID { get; set; }
+        [DataMember]
+        public string GameStatusDesc { get; set; }
+    }
+    [DataContract]
     public class DTO_Guess
     {
         [DataMember]

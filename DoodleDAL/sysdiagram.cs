@@ -12,15 +12,12 @@ namespace DoodleDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class drawPoint
+    public partial class sysdiagram
     {
-        public int DrawPointID { get; set; }
-        public Nullable<int> DrawID { get; set; }
-        public Nullable<double> DrawPointX { get; set; }
-        public Nullable<double> DrawPointY { get; set; }
-        public Nullable<double> DrawPointX2 { get; set; }
-        public Nullable<double> DrawPointY2 { get; set; }
-    
-        public virtual draws draw { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -11,7 +11,7 @@
   <xs:element name="GetDoodleUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetDoodleUserResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -25,7 +25,7 @@
   <xs:element name="AddUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="AddUserResult" nillable="true" type="q2:DTO_Users" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q2:DTO_Users" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -37,7 +37,7 @@
   <xs:element name="GetAllUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q3:ArrayOfDTO_Users" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q3:ArrayOfDTO_Users" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -51,7 +51,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="LoginResult" nillable="true" type="q5:DTO_Users" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q5:DTO_Users" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -63,7 +63,7 @@
   <xs:element name="GatherOpenDrawsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GatherOpenDrawsResult" nillable="true" type="q6:ArrayOfDTO_OpenDraws" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q6:ArrayOfDTO_OpenDraws" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -77,7 +77,7 @@
   <xs:element name="CheckGuessResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="CheckGuessResult" nillable="true" type="q8:DTO_Guess" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q8:DTO_Guess" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -91,7 +91,7 @@
   <xs:element name="JoinDrawResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="JoinDrawResult" nillable="true" type="q10:DTO_JoinDraw" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q10:DTO_JoinDraw" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -105,7 +105,7 @@
   <xs:element name="SetWinnerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="SetWinnerResult" nillable="true" type="q12:DTO_Winner" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q12:DTO_Winner" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -119,7 +119,7 @@
   <xs:element name="CreateDrawResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="CreateDrawResult" nillable="true" type="q14:DTO_OpenDraws" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q14:DTO_OpenDraws" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,7 +133,7 @@
   <xs:element name="StartDrawResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="StartDrawResult" nillable="true" type="q16:DTO_OpenDraws" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q16:DTO_OpenDraws" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -145,7 +145,7 @@
   <xs:element name="GetDrawCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="GetDrawCategoriesResult" nillable="true" type="q17:ArrayOfDTO_GameCategory" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q17:ArrayOfDTO_GameCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -159,7 +159,47 @@
   <xs:element name="EndDrawResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="EndDrawResult" nillable="true" type="q19:DTO_DrawID" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q19:DTO_DrawID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PushLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="line" nillable="true" type="q20:DTO_DrawPoints" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PushLineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q21:ArrayOfDTO_DrawPoints" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLineCount">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLineCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q22:DTO_LineCount" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDrawPoints">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="drawIDObj" nillable="true" type="q23:DTO_DrawID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDrawPointsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DoodleModel" minOccurs="0" name="Data" nillable="true" type="q24:ArrayOfDTO_DrawPoints" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

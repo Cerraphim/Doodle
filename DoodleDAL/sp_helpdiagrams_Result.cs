@@ -10,17 +10,13 @@
 namespace DoodleDAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class drawPoint
+    public partial class sp_helpdiagrams_Result
     {
-        public int DrawPointID { get; set; }
-        public Nullable<int> DrawID { get; set; }
-        public Nullable<double> DrawPointX { get; set; }
-        public Nullable<double> DrawPointY { get; set; }
-        public Nullable<double> DrawPointX2 { get; set; }
-        public Nullable<double> DrawPointY2 { get; set; }
-    
-        public virtual draws draw { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

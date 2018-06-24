@@ -21,7 +21,7 @@ namespace DoodleDAL
         public Nullable<int> DrawRating { get; set; }
         public Nullable<int> DoodlerRating { get; set; }
     
-        public virtual draw draw { get; set; }
+        public virtual draws draw { get; set; }
         public virtual user user { get; set; }
     }
 }

@@ -12,28 +12,29 @@ namespace DoodleDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class draws
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public draws()
         {
-            this.draws = new HashSet<draws>();
+            this.drawPoints = new HashSet<drawPoint>();
             this.noodlers = new HashSet<noodler>();
-            this.userLogins = new HashSet<userLogin>();
         }
     
-        public int UserID { get; set; }
-        public string DisplayName { get; set; }
-        public string Email { get; set; }
-        public string Picture { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public int DrawID { get; set; }
+        public Nullable<int> DoodlerUserID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public Nullable<int> DrawStatusID { get; set; }
+        public string Answer { get; set; }
     
+        public virtual drawCategory drawCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<draws> draws { get; set; }
+        public virtual ICollection<drawPoint> drawPoints { get; set; }
+        public virtual drawStatu drawStatu { get; set; }
+        public virtual user user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<noodler> noodlers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userLogin> userLogins { get; set; }
     }
 }

@@ -79,6 +79,24 @@
   <wsdl:message name="IService1_EndDraw_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndDrawResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_PushLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:PushLine" />
+  </wsdl:message>
+  <wsdl:message name="IService1_PushLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PushLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetLineCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLineCount" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetLineCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLineCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDrawPoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDrawPoints" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDrawPoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDrawPointsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetDoodleUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDoodleUser" message="tns:IService1_GetDoodleUser_InputMessage" />
@@ -128,121 +146,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/EndDraw" message="tns:IService1_EndDraw_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/EndDrawResponse" message="tns:IService1_EndDraw_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="PushLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/PushLine" message="tns:IService1_PushLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/PushLineResponse" message="tns:IService1_PushLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLineCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLineCount" message="tns:IService1_GetLineCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLineCountResponse" message="tns:IService1_GetLineCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDrawPoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDrawPoints" message="tns:IService1_GetDrawPoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDrawPointsResponse" message="tns:IService1_GetDrawPoints_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetDoodleUser">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetDoodleUser" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AddUser">
-      <soap:operation soapAction="http://tempuri.org/IService1/AddUser" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllUsers">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetAllUsers" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Login">
-      <soap:operation soapAction="http://tempuri.org/IService1/Login" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GatherOpenDraws">
-      <soap:operation soapAction="http://tempuri.org/IService1/GatherOpenDraws" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CheckGuess">
-      <soap:operation soapAction="http://tempuri.org/IService1/CheckGuess" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="JoinDraw">
-      <soap:operation soapAction="http://tempuri.org/IService1/JoinDraw" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SetWinner">
-      <soap:operation soapAction="http://tempuri.org/IService1/SetWinner" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateDraw">
-      <soap:operation soapAction="http://tempuri.org/IService1/CreateDraw" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="StartDraw">
-      <soap:operation soapAction="http://tempuri.org/IService1/StartDraw" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetDrawCategories">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetDrawCategories" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EndDraw">
-      <soap:operation soapAction="http://tempuri.org/IService1/EndDraw" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="Service1">
-    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
-      <soap:address location="http://www.jumpcreek.com/doodle/Service1.svc" />
-    </wsdl:port>
-  </wsdl:service>
+  <wsdl:service name="Service1" />
 </wsdl:definitions>

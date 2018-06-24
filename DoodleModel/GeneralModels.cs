@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 namespace DoodleModel
 {
     [DataContract]
+    public class Wrapper<T>
+    {
+        [DataMember]
+        public List<T> Data { get; set; }
+    }
+    [DataContract]
     public class DTO_Users
     {
         [DataMember]
@@ -21,7 +27,7 @@ namespace DoodleModel
         [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         
         public string print()
         {
@@ -52,7 +58,7 @@ namespace DoodleModel
         [DataMember]
         public string DrawCategoryName { get; set; }
         [DataMember]
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
         [DataMember]
         public string Doodler { get; set; }
         [DataMember]
@@ -64,13 +70,13 @@ namespace DoodleModel
     public class DTO_NewDraw
     {
         [DataMember]
-        public int DrawCategoryID { get; set; }
+        public int? DrawCategoryID { get; set; }
         [DataMember]
-        public int DoodlerID { get; set; }
+        public int? DoodlerID { get; set; }
         [DataMember]
         public string Answer { get; set; }
         [DataMember]
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
     }
     [DataContract]
     public class DTO_GameCategory
@@ -100,13 +106,36 @@ namespace DoodleModel
         [DataMember]
         public double DrawPointY { get; set; }
         [DataMember]
+        public double DrawPointX2 { get; set; }
+        [DataMember]
+        public double DrawPointY2 { get; set; }
+        [DataMember]
         public int DrawPointID { get; set; }
+
+        public string DisplayPoint
+        {
+            get
+            {
+                return string.Format("x1:{0:0.0} y1:{1:0.0} x2:{2:0.0} y2:{3:0.0}",
+                    DrawPointX,
+                    DrawPointY,
+                    DrawPointX2,
+                    DrawPointY2
+                );
+            }
+        }
     }
     [DataContract]
     public class DTO_DrawID
     {
         [DataMember]
         public int DrawID { get; set; }
+    }
+    [DataContract]
+    public class DTO_LineCount
+    {
+        [DataMember]
+        public int lineCount { get; set; }
     }
     [DataContract]
     public class DTO_JoinDraw

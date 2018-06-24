@@ -17,13 +17,13 @@ namespace DoodleDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public drawStatu()
         {
-            this.draws = new HashSet<draw>();
+            this.draws = new HashSet<draws>();
         }
     
         public int DrawStatusID { get; set; }
         public string DrawStatusDesc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<draw> draws { get; set; }
+        public virtual ICollection<draws> draws { get; set; }
     }
 }

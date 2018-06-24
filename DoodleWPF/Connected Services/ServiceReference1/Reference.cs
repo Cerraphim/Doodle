@@ -16,76 +16,124 @@ namespace DoodleWPF.ServiceReference1 {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDoodleUser", ReplyAction="http://tempuri.org/IService1/GetDoodleUserResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         string GetDoodleUser(int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDoodleUser", ReplyAction="http://tempuri.org/IService1/GetDoodleUserResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<string> GetDoodleUserAsync(int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddUser", ReplyAction="http://tempuri.org/IService1/AddUserResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_Users AddUser(DoodleModel.DTO_Users u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddUser", ReplyAction="http://tempuri.org/IService1/AddUserResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_Users> AddUserAsync(DoodleModel.DTO_Users u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_Users[] GetAllUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_Users[]> GetAllUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_Users Login([System.ServiceModel.MessageParameterAttribute(Name="login")] DoodleModel.DTO_Login login1);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_Users> LoginAsync(DoodleModel.DTO_Login login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GatherOpenDraws", ReplyAction="http://tempuri.org/IService1/GatherOpenDrawsResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_OpenDraws[] GatherOpenDraws();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GatherOpenDraws", ReplyAction="http://tempuri.org/IService1/GatherOpenDrawsResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_OpenDraws[]> GatherOpenDrawsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckGuess", ReplyAction="http://tempuri.org/IService1/CheckGuessResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_Guess CheckGuess(DoodleModel.DTO_Guess guess);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckGuess", ReplyAction="http://tempuri.org/IService1/CheckGuessResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_Guess> CheckGuessAsync(DoodleModel.DTO_Guess guess);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/JoinDraw", ReplyAction="http://tempuri.org/IService1/JoinDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_JoinDraw JoinDraw(DoodleModel.DTO_JoinDraw join);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/JoinDraw", ReplyAction="http://tempuri.org/IService1/JoinDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_JoinDraw> JoinDrawAsync(DoodleModel.DTO_JoinDraw join);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetWinner", ReplyAction="http://tempuri.org/IService1/SetWinnerResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_Winner SetWinner(DoodleModel.DTO_Winner winner);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetWinner", ReplyAction="http://tempuri.org/IService1/SetWinnerResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_Winner> SetWinnerAsync(DoodleModel.DTO_Winner winner);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateDraw", ReplyAction="http://tempuri.org/IService1/CreateDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_OpenDraws CreateDraw(DoodleModel.DTO_NewDraw draw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateDraw", ReplyAction="http://tempuri.org/IService1/CreateDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_OpenDraws> CreateDrawAsync(DoodleModel.DTO_NewDraw draw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/StartDraw", ReplyAction="http://tempuri.org/IService1/StartDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_OpenDraws StartDraw(DoodleModel.DTO_OpenDraws draw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/StartDraw", ReplyAction="http://tempuri.org/IService1/StartDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_OpenDraws> StartDrawAsync(DoodleModel.DTO_OpenDraws draw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrawCategories", ReplyAction="http://tempuri.org/IService1/GetDrawCategoriesResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_GameCategory[] GetDrawCategories();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrawCategories", ReplyAction="http://tempuri.org/IService1/GetDrawCategoriesResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_GameCategory[]> GetDrawCategoriesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndDraw", ReplyAction="http://tempuri.org/IService1/EndDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         DoodleModel.DTO_DrawID EndDraw(DoodleModel.DTO_DrawID drawid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EndDraw", ReplyAction="http://tempuri.org/IService1/EndDrawResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
         System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndDrawAsync(DoodleModel.DTO_DrawID drawid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PushLine", ReplyAction="http://tempuri.org/IService1/PushLineResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        DoodleModel.DTO_DrawPoints[] PushLine(DoodleModel.DTO_DrawPoints line);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PushLine", ReplyAction="http://tempuri.org/IService1/PushLineResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        System.Threading.Tasks.Task<DoodleModel.DTO_DrawPoints[]> PushLineAsync(DoodleModel.DTO_DrawPoints line);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetLineCount", ReplyAction="http://tempuri.org/IService1/GetLineCountResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        DoodleModel.DTO_LineCount GetLineCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetLineCount", ReplyAction="http://tempuri.org/IService1/GetLineCountResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        System.Threading.Tasks.Task<DoodleModel.DTO_LineCount> GetLineCountAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrawPoints", ReplyAction="http://tempuri.org/IService1/GetDrawPointsResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        DoodleModel.DTO_DrawPoints[] GetDrawPoints(DoodleModel.DTO_DrawID drawIDObj);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrawPoints", ReplyAction="http://tempuri.org/IService1/GetDrawPointsResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="Data")]
+        System.Threading.Tasks.Task<DoodleModel.DTO_DrawPoints[]> GetDrawPointsAsync(DoodleModel.DTO_DrawID drawIDObj);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +257,30 @@ namespace DoodleWPF.ServiceReference1 {
         
         public System.Threading.Tasks.Task<DoodleModel.DTO_DrawID> EndDrawAsync(DoodleModel.DTO_DrawID drawid) {
             return base.Channel.EndDrawAsync(drawid);
+        }
+        
+        public DoodleModel.DTO_DrawPoints[] PushLine(DoodleModel.DTO_DrawPoints line) {
+            return base.Channel.PushLine(line);
+        }
+        
+        public System.Threading.Tasks.Task<DoodleModel.DTO_DrawPoints[]> PushLineAsync(DoodleModel.DTO_DrawPoints line) {
+            return base.Channel.PushLineAsync(line);
+        }
+        
+        public DoodleModel.DTO_LineCount GetLineCount() {
+            return base.Channel.GetLineCount();
+        }
+        
+        public System.Threading.Tasks.Task<DoodleModel.DTO_LineCount> GetLineCountAsync() {
+            return base.Channel.GetLineCountAsync();
+        }
+        
+        public DoodleModel.DTO_DrawPoints[] GetDrawPoints(DoodleModel.DTO_DrawID drawIDObj) {
+            return base.Channel.GetDrawPoints(drawIDObj);
+        }
+        
+        public System.Threading.Tasks.Task<DoodleModel.DTO_DrawPoints[]> GetDrawPointsAsync(DoodleModel.DTO_DrawID drawIDObj) {
+            return base.Channel.GetDrawPointsAsync(drawIDObj);
         }
     }
 }

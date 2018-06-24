@@ -92,4 +92,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTO_DrawID" nillable="true" type="tns:DTO_DrawID" />
+  <xs:complexType name="DTO_DrawPoints">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DrawID" type="xs:int" />
+      <xs:element minOccurs="0" name="DrawPointID" type="xs:int" />
+      <xs:element minOccurs="0" name="DrawPointX" type="xs:double" />
+      <xs:element minOccurs="0" name="DrawPointX2" type="xs:double" />
+      <xs:element minOccurs="0" name="DrawPointY" type="xs:double" />
+      <xs:element minOccurs="0" name="DrawPointY2" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_DrawPoints" nillable="true" type="tns:DTO_DrawPoints" />
+  <xs:complexType name="ArrayOfDTO_DrawPoints">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTO_DrawPoints" nillable="true" type="tns:DTO_DrawPoints" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTO_DrawPoints" nillable="true" type="tns:ArrayOfDTO_DrawPoints" />
+  <xs:complexType name="DTO_LineCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lineCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_LineCount" nillable="true" type="tns:DTO_LineCount" />
 </xs:schema>

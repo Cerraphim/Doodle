@@ -17,7 +17,7 @@ namespace DoodleDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public drawCategory()
         {
-            this.draws = new HashSet<draw>();
+            this.draws = new HashSet<draws>();
         }
     
         public int DrawCategoryID { get; set; }
@@ -25,6 +25,6 @@ namespace DoodleDAL
         public string DrawCategoryIcon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<draw> draws { get; set; }
+        public virtual ICollection<draws> draws { get; set; }
     }
 }

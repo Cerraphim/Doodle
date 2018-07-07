@@ -14,7 +14,7 @@ namespace DoodleModel
         public List<T> Data { get; set; }
     }
     [DataContract]
-    public class DTO_Users
+    public class DTO_User
     {
         [DataMember]
         public int ID { get; set; }
@@ -53,7 +53,7 @@ namespace DoodleModel
         public float Longitude { get; set; }
     }
     [DataContract]
-    public class DTO_OpenDraws
+    public class DTO_OpenDraw
     {
         [DataMember]
         public string DrawCategoryName { get; set; }

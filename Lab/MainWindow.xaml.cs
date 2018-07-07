@@ -92,7 +92,7 @@ namespace Lab
                     return instance;
                 }
             }
-            public List<DTO_OpenDraws> drawList;
+            public List<DTO_OpenDraw> drawList;
         }
 
         public sealed class S_Noodler
@@ -281,15 +281,15 @@ namespace Lab
 
         //WEB SERVICE FUNCTIONS///////////////////////////////////////////////////////////////////////
 
-        public async Task<DTO_Users> WS_Login(DTO_Login login)
+        public async Task<DTO_User> WS_Login(DTO_Login login)
         {
-            DTO_Users temp = new DTO_Users(); 
+            DTO_User temp = new DTO_User(); 
             try
             {           
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "Login"), login);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_Users>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_Users>));
+                var des = (Wrapper<DTO_User>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_User>));
                 var userList = des.Data.ToList();
 
                 if (userList.Count == 1)
@@ -306,15 +306,15 @@ namespace Lab
             return temp;
         }
 
-        public async Task<DTO_Users> WS_RegisterUser(DTO_Users user)
+        public async Task<DTO_User> WS_RegisterUser(DTO_User user)
         {
-            DTO_Users temp = new DTO_Users();
+            DTO_User temp = new DTO_User();
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "AddUser"), user);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_Users>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_Users>));
+                var des = (Wrapper<DTO_User>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_User>));
                 var userList = des.Data.ToList();
 
                 if (userList.Count == 1)
@@ -335,11 +335,11 @@ namespace Lab
         {
             try
             {
-                DTO_Users temp = new DTO_Users();
+                DTO_User temp = new DTO_User();
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "GetAllUsers"), temp);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_Users>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_Users>));
+                var des = (Wrapper<DTO_User>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_User>));
                 var userList = des.Data.ToList();
                 //listviewUsers.ItemsSource = userList;
             }
@@ -351,14 +351,14 @@ namespace Lab
 
         public async Task WS_GatherOpenDraws()
         {
-            DTO_OpenDraws draw = new DTO_OpenDraws();
-            List<DTO_OpenDraws> drawList;
+            DTO_OpenDraw draw = new DTO_OpenDraw();
+            List<DTO_OpenDraw> drawList;
             try
             {      
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "GetOpenDraws"), draw);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_OpenDraws>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraws>));
+                var des = (Wrapper<DTO_OpenDraw>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraw>));
                 drawList = des.Data.ToList();
                 S_DrawList.Instance.drawList = drawList;         
             }
@@ -441,14 +441,14 @@ namespace Lab
             return winner;
         }
 
-        public async Task<DTO_OpenDraws> WS_StartDraw(DTO_OpenDraws draw)
+        public async Task<DTO_OpenDraw> WS_StartDraw(DTO_OpenDraw draw)
         {
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "StartDraw"), draw);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_OpenDraws>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraws>));
+                var des = (Wrapper<DTO_OpenDraw>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraw>));
                 var drawList = des.Data.ToList();
 
                 if (drawList.Count == 1)
@@ -545,15 +545,15 @@ namespace Lab
             return gameStatusList;
         }
 
-        public async Task<DTO_OpenDraws> WS_CreateDraw(DTO_NewDraw draw)
+        public async Task<DTO_OpenDraw> WS_CreateDraw(DTO_NewDraw draw)
         {
-            DTO_OpenDraws openDraw = new DTO_OpenDraws();
+            DTO_OpenDraw openDraw = new DTO_OpenDraw();
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(string.Format(@"{0}{1}", URL, "CreateDraw"), draw);
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
-                var des = (Wrapper<DTO_OpenDraws>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraws>));
+                var des = (Wrapper<DTO_OpenDraw>)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Wrapper<DTO_OpenDraw>));
                 var drawList = des.Data.ToList();
 
                 if (drawList.Count == 1)
@@ -593,6 +593,8 @@ namespace Lab
             CollapsePages();
             TBox_LoginEmail.Text = "";
             TBox_LoginPassword.Text = "";
+            BTN_LoginLogin.Visibility = Visibility.Visible;
+            BTN_LoginRegister.Visibility = Visibility.Visible;
             Page_Login.Visibility = Visibility.Visible;
             output.Visibility = Visibility.Visible;
         }
@@ -611,7 +613,7 @@ namespace Lab
                 login.Latitude = 200;
                 login.Longitude = 200;
 
-                DTO_Users user = new DTO_Users();
+                DTO_User user = new DTO_User();
                 var temp = await WS_Login(login);
                 user = temp;
                 if (user != null)
@@ -657,11 +659,12 @@ namespace Lab
         {
             CollapsePages();
             Page_Homepage.Visibility = Visibility.Visible;
-            BTN_HomepageJoin.Visibility = Visibility.Hidden;
+            
             TBlock_HomepageUser.Text = S_User.Instance.displayName;          
             await WS_GatherOpenDraws();
             LV_HomePageDraws.ItemsSource = S_DrawList.Instance.drawList;
             LV_HomePageDraws.SelectedIndex = -1;
+            BTN_HomepageJoin.Visibility = Visibility.Collapsed;
         }
 
         private void BTN_HomepageNew_Click(object sender, RoutedEventArgs e)
@@ -675,7 +678,14 @@ namespace Lab
             {
                 S_Draw.Instance.drawID = S_DrawList.Instance.drawList[LV_HomePageDraws.SelectedIndex].DrawID;
                 S_Draw.Instance.doodlerName = S_DrawList.Instance.drawList[LV_HomePageDraws.SelectedIndex].Doodler;
+                //get DoodlerID
                 S_Draw.Instance.drawCategoryName = S_DrawList.Instance.drawList[LV_HomePageDraws.SelectedIndex].DrawCategoryName;
+                for(int x = 0; x < S_GameCategories.Instance.gameCategoryList.Count(); x++)
+                {
+                    if (S_Draw.Instance.drawCategoryName.Equals(S_GameCategories.Instance.gameCategoryList.ElementAt(x).CategoryName)){
+                        S_Draw.Instance.categoryID = S_GameCategories.Instance.gameCategoryList.ElementAt(x).CategoryID;
+                    }
+                }
                 DrawPage_NLobby();
             }
         }
@@ -695,6 +705,8 @@ namespace Lab
             TBox_RegisterUserName.Text = "";
             TBox_RegistrationPicture.Text = "";
             Page_Register.Visibility = Visibility.Visible;
+            BTN_RegisterBack.Visibility = Visibility.Visible;
+            BTN_RegisterSubmit.Visibility = Visibility.Visible;
         }
 
         private void BTN_RegisterBack_Click(object sender, RoutedEventArgs e)
@@ -708,7 +720,7 @@ namespace Lab
             if (TBox_RegisterEmail.Text != "" && TBox_RegisterPassword.Text != ""
                 && TBox_RegistrationPicture.Text != "" && TBox_RegisterUserName.Text != "")
             {
-                DTO_Users user = new DTO_Users();
+                DTO_User user = new DTO_User();
                 user.EmailAddress = TBox_RegisterEmail.Text;
                 user.Password = TBox_RegisterPassword.Text;
                 user.Picture = TBox_RegistrationPicture.Text;
@@ -868,7 +880,7 @@ namespace Lab
             draw.StartTime = null;
             draw.DrawCategoryID = CBox_GGameCategory.SelectedIndex + 1;
 
-            DTO_OpenDraws newdraw = await WS_CreateDraw(draw);
+            DTO_OpenDraw newdraw = await WS_CreateDraw(draw);
             S_Draw.Instance.drawCategoryName = newdraw.DrawCategoryName;
             S_Draw.Instance.drawID = newdraw.DrawID;
             S_Draw.Instance.doodleUserID = S_User.Instance.userID;

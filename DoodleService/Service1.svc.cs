@@ -14,7 +14,7 @@ namespace DoodleService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public DTO_Users GetDoodleUser(DTO_Users uo)
+        public DTO_User GetDoodleUser(DTO_User uo)
         {
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
@@ -35,9 +35,9 @@ namespace DoodleService
             }
         }
 
-        public List<DTO_Users> AddUser(DTO_Users user)
+        public List<DTO_User> AddUser(DTO_User user)
         {
-            List<DTO_Users> users = new List<DTO_Users>();
+            List<DTO_User> users = new List<DTO_User>();
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
                 var sqllist = db.users.Where(c => c.Email == user.EmailAddress).ToList();       
@@ -62,15 +62,15 @@ namespace DoodleService
             }
         }
 
-        public List<DTO_Users> GetAllUsers(DTO_Users user)
+        public List<DTO_User> GetAllUsers(DTO_User user)
         {
-            List<DTO_Users> users = new List<DTO_Users>();   
+            List<DTO_User> users = new List<DTO_User>();   
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
                 var sqllist = db.users.OrderBy(c=>c.DisplayName).ToList();
                 foreach( var s in sqllist)
                 {
-                    DTO_Users u = new DTO_Users();
+                    DTO_User u = new DTO_User();
                     u.DisplayName = s.DisplayName;
                     if (s.Active.HasValue)
                     {
@@ -86,9 +86,9 @@ namespace DoodleService
             return users;
         }
 
-        public List<DTO_Users> Login(DTO_Login login)
+        public List<DTO_User> Login(DTO_Login login)
         {
-            List<DTO_Users> users = new List<DTO_Users>();
+            List<DTO_User> users = new List<DTO_User>();
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
                 var sqllist = db.users.Where(c => c.Email.ToLower() == login.Email.ToLower()
@@ -96,7 +96,7 @@ namespace DoodleService
 
                 foreach (var s in sqllist)
                 {
-                    DTO_Users u = new DTO_Users();
+                    DTO_User u = new DTO_User();
                     u.DisplayName = s.DisplayName;
                     if (s.Active.HasValue)
                     {
@@ -129,7 +129,7 @@ namespace DoodleService
             return users;
         }
 
-        public List<DTO_OpenDraws> GetOpenDraws(List<DTO_OpenDraws> list)
+        public List<DTO_OpenDraw> GetOpenDraws(List<DTO_OpenDraw> list)
         {
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
@@ -138,7 +138,7 @@ namespace DoodleService
                
                 foreach (var s in sqllist)
                 {
-                    DTO_OpenDraws o = new DTO_OpenDraws();
+                    DTO_OpenDraw o = new DTO_OpenDraw();
                     o.Doodler = "Test Doodler";
                     o.DrawCategoryName = "Test DrawCategoryName";
                     o.DrawID = s.DrawID;
@@ -248,12 +248,12 @@ namespace DoodleService
             return drawpointlist;
         }
 
-        public List<DTO_OpenDraws> CreateDraw(DTO_NewDraw draw)
+        public List<DTO_OpenDraw> CreateDraw(DTO_NewDraw draw)
         {
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
-                List<DTO_OpenDraws> openDrawList = new List<DTO_OpenDraws>();
-                DTO_OpenDraws openDraw = new DTO_OpenDraws();
+                List<DTO_OpenDraw> openDrawList = new List<DTO_OpenDraw>();
+                DTO_OpenDraw openDraw = new DTO_OpenDraw();
 
                 int? temp = 1;
                 draws sqlobj = new draws();
@@ -299,9 +299,9 @@ namespace DoodleService
             return ret;
         }
 
-        public List<DTO_OpenDraws> StartDraw(DTO_OpenDraws draw)
+        public List<DTO_OpenDraw> StartDraw(DTO_OpenDraw draw)
         {
-            List<DTO_OpenDraws> list = new List<DTO_OpenDraws>();
+            List<DTO_OpenDraw> list = new List<DTO_OpenDraw>();
             using (DB_122744_doodleEntities db = new DB_122744_doodleEntities())
             {
                 int? temp = 2;

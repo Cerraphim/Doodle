@@ -15,27 +15,27 @@ namespace DoodleService
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        DTO_Users GetDoodleUser(DTO_Users u);
+        DTO_User GetDoodleUser(DTO_User u);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_Users> AddUser(DTO_Users u);
+        List<DTO_User> AddUser(DTO_User u);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_Users> GetAllUsers(DTO_Users user);
+        List<DTO_User> GetAllUsers(DTO_User user);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_Users> Login(DTO_Login login);
+        List<DTO_User> Login(DTO_Login login);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_OpenDraws> GetOpenDraws(List<DTO_OpenDraws> list);
+        List<DTO_OpenDraw> GetOpenDraws(List<DTO_OpenDraw> list);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
@@ -55,12 +55,12 @@ namespace DoodleService
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_OpenDraws> CreateDraw(DTO_NewDraw draw);
+        List<DTO_OpenDraw> CreateDraw(DTO_NewDraw draw);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
-        List<DTO_OpenDraws> StartDraw(DTO_OpenDraws draw);
+        List<DTO_OpenDraw> StartDraw(DTO_OpenDraw draw);
 
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
@@ -92,11 +92,9 @@ namespace DoodleService
         [OperationContract]
         List<DTO_DrawPoints> GetDrawPoints(DTO_DrawID drawIDObj);
 
-
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
         [return: MessageParameter(Name = "Data")]
         [OperationContract]
         List<DTO_DrawPoints> ClearDrawPoints(DTO_DrawID drawIDObj);
-
     }
 }
